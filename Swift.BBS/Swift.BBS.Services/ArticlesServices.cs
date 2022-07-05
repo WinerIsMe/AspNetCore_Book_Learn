@@ -2,6 +2,7 @@
 using Swift.BBS.IServices;
 using Swift.BBS.Model.Models;
 using Swift.BBS.Repositories;
+using Swift.BBS.Services.BASE;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,27 +12,27 @@ using System.Threading.Tasks;
 
 namespace Swift.BBS.Services
 {
-    public class ArticlesServices : IArticlesServices
+    public class ArticlesServices : BaseServices<Article>, IArticlesServices
     {
-        private IArticleRepository dal = new ArticleRepository();
-        public void Add(Article model)
-        {
-            dal.Add(model);
-        }
+        //private IArticleRepository dal = new ArticleRepository();
+        //public void Add(Article model)
+        //{
+        //    dal.Add(model);
+        //}
 
-        public void Delete(Article model)
-        {
-            dal.Delete(model);
-        }
+        //public void Delete(Article model)
+        //{
+        //    dal.Delete(model);
+        //}
 
-        public List<Article> Query(Expression<Func<Article, bool>> whereExpression)
-        {
-            return dal.Query(whereExpression);
-        }
+        //public List<Article> Query(Expression<Func<Article, bool>> whereExpression)
+        //{
+        //    return dal.Query(whereExpression);
+        //}
 
-        public void Update(Article model)
-        {
-            dal.Update(model);
-        }
+        //public void Update(Article model)
+        //{
+        //    dal.Update(model);
+        //}
     }
 }

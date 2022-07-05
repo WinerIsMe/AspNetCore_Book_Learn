@@ -4,6 +4,12 @@
         <name>Swift.BBS</name>
     </assembly>
     <members>
+        <member name="M:Swift.BBS.Controllers.ArticleController.GetAll">
+            <summary>
+            获取所有文章
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Swift.BBS.Controllers.ArticleController.Get(System.Int32)">
             <summary>
             根据ID查询文章
