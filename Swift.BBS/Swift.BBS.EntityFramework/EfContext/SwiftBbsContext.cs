@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swift.BBS.Repositories.EfContext
+namespace Swift.BBS.EntityFramework.EfContext
 {
     public class SwiftBbsContext : DbContext
     {
@@ -17,11 +17,8 @@ namespace Swift.BBS.Repositories.EfContext
          */
         public SwiftBbsContext() { }
 
-
-        public SwiftBbsContext(DbContextOptions<SwiftBbsContext> options)
-            : base(options)
+        public SwiftBbsContext(DbContextOptions options) : base(options)
         {
-
         }
 
         public DbSet<Article> Articles { get; set; }

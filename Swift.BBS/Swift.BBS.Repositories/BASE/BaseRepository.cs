@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Swift.BBS.IRepositories.Base;
-using Swift.BBS.Repositories.EfContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +8,16 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
+using Swift.BBS.EntityFramework.EfContext;
 
 namespace Swift.BBS.Repositories.BASE
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
     {
         private SwiftBbsContext _context;
-        public BaseRepository()
+        public BaseRepository(SwiftBbsContext context)
         {
-            _context = new SwiftBbsContext();
+            _context = context;
         }
 
         /// <summary>

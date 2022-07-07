@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swift.BBS.IServices;
 using Swift.BBS.Model.Models;
-using Swift.BBS.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

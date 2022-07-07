@@ -10,8 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Swift.BBS.Repositories\Swift.BBS.Repositories.csproj" />
-    <ProjectReference Include="..\Swift.BBS.Services\Swift.BBS.Services.csproj" />
+    <ProjectReference Include="..\Swift.BBS.EntityFramework\Swift.BBS.EntityFramework.csproj" />
+    <ProjectReference Include="..\Swift.BBS.IRepositories\Swift.BBS.IRepositories.csproj" />
+    <ProjectReference Include="..\Swift.BBS.IServices\Swift.BBS.IServices.csproj" />
   </ItemGroup>
 
 </Project>

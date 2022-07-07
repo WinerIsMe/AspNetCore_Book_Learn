@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swift.BBS.IServices;
-using Swift.BBS.Services;
 
 namespace Swift.BBS.Controllers
 {
@@ -8,7 +7,12 @@ namespace Swift.BBS.Controllers
     [Route("api/[controller]")]
     public class CalculatContorller : ControllerBase
     {
-        ICalculateServices calculateServices = new CalculateServices();
+        ICalculateServices calculateServices;
+
+        public CalculatContorller(ICalculateServices calculateServices)
+        {
+            this.calculateServices = calculateServices;
+        }
 
         /// <summary>
         /// 求和接口

@@ -1,18 +1,15 @@
-﻿using Swift.BBS.IRepositories;
+﻿using Swift.BBS.EntityFramework.EfContext;
+using Swift.BBS.IRepositories;
 using Swift.BBS.Model.Models;
 using Swift.BBS.Repositories.BASE;
-using Swift.BBS.Repositories.EfContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Swift.BBS.Repositories
 {
     public class ArticleRepository : BaseRepository<Article>, IArticleRepository
     {
+        public ArticleRepository(SwiftBbsContext context) : base(context)
+        {
+        }
         //private SwiftBbsContext context;
         //public ArticleRepository()
         //{
