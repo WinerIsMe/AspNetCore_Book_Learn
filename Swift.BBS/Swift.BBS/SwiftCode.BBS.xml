@@ -33,6 +33,12 @@
             <param name="pass"></param>
             <returns></returns>
         </member>
+        <member name="M:Swift.BBS.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>
+            Autofac 服务注册
+            </summary>
+            <param name="builder"></param>
+        </member>
         <member name="P:Swift.BBS.WeatherForecast.Date">
             <summary>
             时间

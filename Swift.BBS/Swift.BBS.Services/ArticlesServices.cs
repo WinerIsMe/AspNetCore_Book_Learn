@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Swift.BBS.Services
 {
-    public class ArticlesServices : BaseServices<Article>, IArticlesServices
+    public class ArticleServices : BaseServices<Article>, IArticleServices
     {
         //private IArticleRepository dal = new ArticleRepository();
         //public void Add(Article model)

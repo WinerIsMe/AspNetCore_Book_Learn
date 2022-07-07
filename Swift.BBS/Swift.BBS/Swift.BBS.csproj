@@ -18,8 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Swift.BBS.Common\Swift.BBS.Common.csproj" />
-    <ProjectReference Include="..\Swift.BBS.IServices\Swift.BBS.IServices.csproj" />
-    <ProjectReference Include="..\Swift.BBS.Services\Swift.BBS.Services.csproj" />
+    <ProjectReference Include="..\Swift.BBS.Extensions\Swift.BBS.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

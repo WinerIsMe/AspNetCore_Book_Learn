@@ -11,10 +11,10 @@ namespace Swift.BBS.Controllers
     [Route("api/[controller]/[action]")]
     public class ArticleController : Controller
     {
-        IArticlesServices articleServices;
-        public ArticleController()
+        private readonly IArticleServices articleServices;
+        public ArticleController(IArticleServices articlesServices)
         {
-            articleServices = new ArticlesServices();
+            this.articleServices = articlesServices;
         }
         /// <summary>
         /// 获取所有文章

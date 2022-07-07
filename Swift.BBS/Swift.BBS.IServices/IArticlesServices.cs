@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Swift.BBS.IServices
 {
-    public interface IArticlesServices :IBaseServices<Article>
+    public interface IArticleServices :IBaseServices<Article>
     {
         //void Add(Article model);
         //void Delete(Article model);

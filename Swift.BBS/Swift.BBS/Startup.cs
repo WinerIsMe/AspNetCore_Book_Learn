@@ -1,3 +1,4 @@
+using Autofac;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Filters;
 using Swift.BBS.Common.Helper;
+using Swift.BBS.Extensions.ServiceEntensions;
 using System;
 using System.IO;
 using System.Text;
@@ -21,6 +23,15 @@ namespace Swift.BBS
         }
 
         public IConfiguration Configuration { get; }
+
+        /// <summary>
+        /// Autofac ЗўЮёзЂВс
+        /// </summary>
+        /// <param name="builder"></param>
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule<AutofacModuleRegister>();
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
