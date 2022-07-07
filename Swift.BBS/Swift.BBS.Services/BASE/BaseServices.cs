@@ -1,11 +1,8 @@
 ﻿using Swift.BBS.IRepositories.Base;
 using Swift.BBS.IServices.BASE;
-using Swift.BBS.Repositories.BASE;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,9 +11,9 @@ namespace Swift.BBS.Services.BASE
     public class BaseServices<TEntity> : IBaseServices<TEntity> where TEntity : class, new()
     {
         private IBaseRepository<TEntity> _baseRepository;
-        public BaseServices()
+        public BaseServices(IBaseRepository<TEntity> baseRepository)
         {
-            _baseRepository = new BaseRepository<TEntity>();
+            _baseRepository = baseRepository;
         }
 
         /// <summary>

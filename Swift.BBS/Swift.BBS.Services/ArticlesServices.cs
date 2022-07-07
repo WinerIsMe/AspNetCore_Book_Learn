@@ -1,19 +1,16 @@
-﻿using Swift.BBS.IRepositories;
+﻿using Swift.BBS.IRepositories.Base;
 using Swift.BBS.IServices;
 using Swift.BBS.Model.Models;
-using Swift.BBS.Repositories;
 using Swift.BBS.Services.BASE;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Swift.BBS.Services
 {
     public class ArticleServices : BaseServices<Article>, IArticleServices
     {
+        public ArticleServices(IBaseRepository<Article> baseRepository) : base(baseRepository)
+        {
+        }
+
         //private IArticleRepository dal = new ArticleRepository();
         //public void Add(Article model)
         //{
