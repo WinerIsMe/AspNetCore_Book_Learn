@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Swift.BBS.Model.Models
 {
     /// <summary>
-    /// 文章
+    /// 问答
     /// </summary>
-    public class Article: RootEntityTKey<int>
+    public class Question : RootEntityTKey<int>
     {
         /// <summary>
         /// 标题
         /// </summary>
         public string Title { get; set; }
-        /// <summary>
-        /// 封面
-        /// </summary>
-        public string Cover { get; set; }
         /// <summary>
         /// 内容
         /// </summary>
@@ -41,14 +39,11 @@ namespace Swift.BBS.Model.Models
         /// 创建用户
         /// </summary>
         public virtual UserInfo CreateUser { get; set; }
+
         /// <summary>
-        /// 收藏文章的用户
+        /// 问答评论
         /// </summary>
-        public virtual ICollection<UserCollectionArticle> CollectionArticles { get; set; }= new List<UserCollectionArticle>();
-        /// <summary>
-        /// 文章评论
-        /// </summary>
-        public virtual ICollection<ArticleComment> ArticleComments { get; set; }= new List<ArticleComment>();
+        public virtual ICollection<QuestionComment> QuestionComments { get; set; }
 
     }
 }

@@ -1,4 +1,8 @@
 ﻿using Autofac;
+using Swift.BBS.IRepositories.Base;
+using Swift.BBS.IServices.BASE;
+using Swift.BBS.Repositories.BASE;
+using Swift.BBS.Services.BASE;
 using System;
 using System.IO;
 using System.Reflection;
@@ -32,24 +36,41 @@ namespace Swift.BBS.Extensions.ServiceEntensions
 
             #region 指定实现类dll所在的目录位置进行注入
 
-            var basePath = AppContext.BaseDirectory;
-            var servicesDllFile = Path.Combine(basePath, "Swift.BBS.Services.dll");
-            var respositoryDllFile = Path.Combine(basePath, "Swift.BBS.Repositories.dll");
-            var entityFrameworkDllFile = Path.Combine(basePath, "Swift.BBS.EntityFramework.dll");
-            if (!(File.Exists(servicesDllFile) && File.Exists(respositoryDllFile) && File.Exists(entityFrameworkDllFile)))
-            {
-                var msg = "Repositories.dll 和 Services.dll 和 EntityFramework.dll 丢失";
-                throw new Exception(msg);
-            }
-            var assemblysServices = Assembly.LoadFrom(servicesDllFile);
+            //var basePath = AppContext.BaseDirectory;
+            //var servicesDllFile = Path.Combine(basePath, "Swift.BBS.Services.dll");
+            //var respositoryDllFile = Path.Combine(basePath, "Swift.BBS.Repositories.dll");
+            //var entityFrameworkDllFile = Path.Combine(basePath, "Swift.BBS.EntityFramework.dll");
+            //if (!(File.Exists(servicesDllFile) && File.Exists(respositoryDllFile) && File.Exists(entityFrameworkDllFile)))
+            //{
+            //    var msg = "Repositories.dll 和 Services.dll 和 EntityFramework.dll 丢失";
+            //    throw new Exception(msg);
+            //}
+            //var assemblysServices = Assembly.LoadFrom(servicesDllFile);
+            //builder.RegisterAssemblyTypes(assemblysServices).AsImplementedInterfaces();
+
+            //var assemblyRespository = Assembly.LoadFrom(respositoryDllFile);
+            //builder.RegisterAssemblyTypes(assemblyRespository).AsImplementedInterfaces();
+
+            //var assemblyEntityFramework = Assembly.LoadFrom(entityFrameworkDllFile);
+            //非接口实现类时，不能使用 AsImplementedInterfaces() 方法
+            //builder.RegisterAssemblyTypes(assemblyEntityFramework);
+
+            #endregion
+
+            #region 注入泛型仓储和服务
+
+            builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency();
+            builder.RegisterGeneric(typeof(BaseServices<>)).As(typeof(IBaseServices<>)).InstancePerDependency();
+
+            var assemblysServices = Assembly.Load("Swift.BBS.Services");
             builder.RegisterAssemblyTypes(assemblysServices).AsImplementedInterfaces();
 
-            var assemblyRespository = Assembly.LoadFrom(respositoryDllFile);
+            var assemblyRespository = Assembly.Load("Swift.BBS.Repositories");
             builder.RegisterAssemblyTypes(assemblyRespository).AsImplementedInterfaces();
 
-            var assemblyEntityFramework = Assembly.LoadFrom(entityFrameworkDllFile);
+            var entityFramework = Assembly.Load("Swift.BBS.EntityFramework");
             //非接口实现类时，不能使用 AsImplementedInterfaces() 方法
-            builder.RegisterAssemblyTypes(assemblyEntityFramework);
+            builder.RegisterAssemblyTypes(entityFramework);
 
             #endregion
         }

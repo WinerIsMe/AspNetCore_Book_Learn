@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Swift.BBS.Model.Models.RootTkey;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Swift.BBS.Model.Models
+namespace Swift.BBS.Model.ViewModels.Article
 {
-    /// <summary>
-    /// 文章
-    /// </summary>
-    public class Article: RootEntityTKey<int>
-    {
+    public class ArticleDto: EntityTKeyDto<int>
+    { 
         /// <summary>
         /// 标题
         /// </summary>
@@ -26,10 +26,6 @@ namespace Swift.BBS.Model.Models
         /// </summary>
         public string Tag { get; set; }
         /// <summary>
-        /// 访问量
-        /// </summary>
-        public int Traffic { get; set; }
-        /// <summary>
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
@@ -37,18 +33,16 @@ namespace Swift.BBS.Model.Models
         /// 创建用户
         /// </summary>
         public int CreateUserId { get; set; }
+
+
         /// <summary>
-        /// 创建用户
+        /// 用户名
         /// </summary>
-        public virtual UserInfo CreateUser { get; set; }
+        public string UserName { get; set; }
         /// <summary>
-        /// 收藏文章的用户
+        /// 头像
         /// </summary>
-        public virtual ICollection<UserCollectionArticle> CollectionArticles { get; set; }= new List<UserCollectionArticle>();
-        /// <summary>
-        /// 文章评论
-        /// </summary>
-        public virtual ICollection<ArticleComment> ArticleComments { get; set; }= new List<ArticleComment>();
+        public string HeadPortrait { get; set; }
 
     }
 }

@@ -40,6 +40,8 @@ namespace Swift.BBS
             services.AddControllers();
             //注入appsetting访问帮助类
             services.AddSingleton(new Appsetting(Configuration));
+            //注册AutoMapper启服务
+            services.AddAutoMapperSetup();
 
             //注册Swagger服务
             #region Swagger
