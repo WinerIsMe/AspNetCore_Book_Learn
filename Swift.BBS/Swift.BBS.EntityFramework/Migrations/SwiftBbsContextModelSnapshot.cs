@@ -211,7 +211,8 @@ namespace Swift.BBS.EntityFramework.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("HeadPortrait")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
 
                     b.Property<string>("Introduction")
                         .HasMaxLength(512)
@@ -235,7 +236,7 @@ namespace Swift.BBS.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserIngos");
+                    b.ToTable("UserInfos");
                 });
 
             modelBuilder.Entity("Swift.BBS.Model.Models.Article", b =>

@@ -1,7 +1,11 @@
-﻿using Swift.BBS.EntityFramework.EfContext;
+﻿using Microsoft.EntityFrameworkCore;
+using Swift.BBS.EntityFramework.EfContext;
 using Swift.BBS.IRepositories;
 using Swift.BBS.Model.Models;
 using Swift.BBS.Repositories.BASE;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Swift.BBS.Repositories
 {
@@ -10,32 +14,16 @@ namespace Swift.BBS.Repositories
         public ArticleRepository(SwiftBbsContext context) : base(context)
         {
         }
-        //private SwiftBbsContext context;
-        //public ArticleRepository()
-        //{
-        //    context = new SwiftBbsContext();
-        //}
-        //public void Add(Article model)
-        //{
-        //    context.Articles.Add(model);
-        //    context.SaveChanges();
-        //}
+        public Task<Article> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            return DbContext().Articles.Where(x => x.Id == id)
+                 .Include(x => x.ArticleComments).ThenInclude(x => x.CreateUser).SingleOrDefaultAsync(cancellationToken);
+        }
 
-        //public void Delete(Article model)
-        //{
-        //    context.Articles.Remove(model);
-        //    context.SaveChanges();
-        //}
-
-        //public List<Article> Query(Expression<Func<Article, bool>> whereExpression)
-        //{
-        //    return context.Articles.Where(whereExpression).ToList();
-        //}
-
-        //public void Update(Article model)
-        //{
-        //    context.Articles.Update(model);
-        //    context.SaveChanges();
-        //}
+        public Task<Article> GetCollectionArticlesByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            return DbContext().Articles.Where(x => x.Id == id)
+                .Include(x => x.CollectionArticles).SingleOrDefaultAsync(cancellationToken);
+        }
     }
 }

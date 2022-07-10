@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Swift.BBS.EntityFramework.Migrations
 {
-    public partial class Add_Article : Migration
+    public partial class InitDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,7 +23,7 @@ namespace Swift.BBS.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserIngos",
+                name: "UserInfos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -34,12 +34,12 @@ namespace Swift.BBS.EntityFramework.Migrations
                     Phone = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true),
                     Introduction = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    HeadPortrait = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HeadPortrait = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserIngos", x => x.Id);
+                    table.PrimaryKey("PK_UserInfos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,9 +60,9 @@ namespace Swift.BBS.EntityFramework.Migrations
                 {
                     table.PrimaryKey("PK_Articles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Articles_UserIngos_CreateUserId",
+                        name: "FK_Articles_UserInfos_CreateUserId",
                         column: x => x.CreateUserId,
-                        principalTable: "UserIngos",
+                        principalTable: "UserInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -84,9 +84,9 @@ namespace Swift.BBS.EntityFramework.Migrations
                 {
                     table.PrimaryKey("PK_Questions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Questions_UserIngos_CreateUserId",
+                        name: "FK_Questions_UserInfos_CreateUserId",
                         column: x => x.CreateUserId,
-                        principalTable: "UserIngos",
+                        principalTable: "UserInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -112,9 +112,9 @@ namespace Swift.BBS.EntityFramework.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ArticleComments_UserIngos_CreateUserId",
+                        name: "FK_ArticleComments_UserInfos_CreateUserId",
                         column: x => x.CreateUserId,
-                        principalTable: "UserIngos",
+                        principalTable: "UserInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -161,9 +161,9 @@ namespace Swift.BBS.EntityFramework.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_QuestionComments_UserIngos_CreateUserId",
+                        name: "FK_QuestionComments_UserInfos_CreateUserId",
                         column: x => x.CreateUserId,
-                        principalTable: "UserIngos",
+                        principalTable: "UserInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -225,7 +225,7 @@ namespace Swift.BBS.EntityFramework.Migrations
                 name: "Articles");
 
             migrationBuilder.DropTable(
-                name: "UserIngos");
+                name: "UserInfos");
         }
     }
 }

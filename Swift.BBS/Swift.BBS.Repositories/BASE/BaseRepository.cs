@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Swift.BBS.IRepositories.Base;
+using Swift.BBS.IRepositories.BASE;
 using System;
 using System.Collections.Generic;
 using System.Linq;

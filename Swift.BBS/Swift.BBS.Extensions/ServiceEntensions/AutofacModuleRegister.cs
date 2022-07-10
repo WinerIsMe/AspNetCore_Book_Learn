@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Swift.BBS.IRepositories.Base;
+using Swift.BBS.IRepositories.BASE;
 using Swift.BBS.IServices.BASE;
 using Swift.BBS.Repositories.BASE;
 using Swift.BBS.Services.BASE;

@@ -21,7 +21,7 @@ namespace Swift.BBS.EntityFramework.EfContext
         {
         }
 
-        public DbSet<UserInfo> UserIngos { get; set; }
+        public DbSet<UserInfo> UserInfos { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<ArticleComment> ArticleComments { get; set; }
@@ -38,7 +38,7 @@ namespace Swift.BBS.EntityFramework.EfContext
             userInfoCfg.Property(p => p.Phone).HasMaxLength(16);
             userInfoCfg.Property(p => p.Introduction).HasMaxLength(512);
             userInfoCfg.Property(p => p.Email).HasMaxLength(64);
-            // userInfoCfg.Property(p => p.HeadPortrait).HasMaxLength(1024);
+            userInfoCfg.Property(p => p.HeadPortrait).HasMaxLength(1024);
             userInfoCfg.Property(p => p.CreateTime).HasColumnType("datetime2");
 
             // 文章

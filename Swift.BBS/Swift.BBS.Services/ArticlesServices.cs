@@ -1,35 +1,68 @@
-﻿using Swift.BBS.IRepositories.Base;
+﻿using Swift.BBS.IRepositories;
+using Swift.BBS.IRepositories.BASE;
 using Swift.BBS.IServices;
 using Swift.BBS.Model.Models;
 using Swift.BBS.Services.BASE;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Swift.BBS.Services
 {
     public class ArticleServices : BaseServices<Article>, IArticleServices
     {
-        public ArticleServices(IBaseRepository<Article> baseRepository) : base(baseRepository)
+        private readonly IBaseRepository<Article> baseRepository;
+        private readonly IArticleRepository articleRepository;
+
+        public ArticleServices(IBaseRepository<Article> baseRepository, IArticleRepository articleRepository) : base(baseRepository)
         {
+            this.baseRepository = baseRepository;
+            this.articleRepository = articleRepository;
         }
 
-        //private IArticleRepository dal = new ArticleRepository();
-        //public void Add(Article model)
-        //{
-        //    dal.Add(model);
-        //}
 
-        //public void Delete(Article model)
-        //{
-        //    dal.Delete(model);
-        //}
+        public Task<Article> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            return articleRepository.GetByIdAsync(id, cancellationToken);
+        }
 
-        //public List<Article> Query(Expression<Func<Article, bool>> whereExpression)
-        //{
-        //    return dal.Query(whereExpression);
-        //}
+        public async Task<Article> GetArticleDetailsAsync(int id, CancellationToken cancellationToken = default)
+        {
+            var entity = await articleRepository.GetByIdAsync(id, cancellationToken);
+            entity.Traffic += 1;
 
-        //public void Update(Article model)
-        //{
-        //    dal.Update(model);
-        //}
+            await articleRepository.UpdateAsync(entity, true, cancellationToken: cancellationToken);
+
+            return entity;
+        }
+
+        public async Task AddArticleCollection(int id, int userId, CancellationToken cancellationToken = default)
+        {
+            var entity = await articleRepository.GetCollectionArticlesByIdAsync(id, cancellationToken);
+            entity.CollectionArticles.Add(new UserCollectionArticle()
+            {
+                ArticleId = id,
+                UserId = userId
+            });
+            await articleRepository.UpdateAsync(entity, true, cancellationToken);
+        }
+
+        public async Task AddArticleComments(int id, int userId, string content, CancellationToken cancellationToken = default)
+        {
+            var entity = await articleRepository.GetByIdAsync(id, cancellationToken);
+            entity.ArticleComments.Add(new ArticleComment()
+            {
+                Content = content,
+                CreateTime = DateTime.Now,
+                CreateUserId = userId
+            });
+            await articleRepository.UpdateAsync(entity, true, cancellationToken);
+        }
+
+        public async Task AdditionalItemAsync(Article entity, bool v, int n = 0)
+        {
+            entity.CreateTime = DateTime.Now.AddDays(-n);
+            await articleRepository.InsertAsync(entity, true);
+        }
     }
 }

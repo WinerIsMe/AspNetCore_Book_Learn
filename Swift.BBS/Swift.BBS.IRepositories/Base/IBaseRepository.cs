@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Swift.BBS.IRepositories.Base
+namespace Swift.BBS.IRepositories.BASE
 {
     /// <summary>
     /// 仓储基类接口

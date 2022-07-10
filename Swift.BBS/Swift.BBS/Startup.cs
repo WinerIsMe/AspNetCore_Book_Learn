@@ -2,12 +2,14 @@ using Autofac;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Filters;
 using Swift.BBS.Common.Helper;
+using Swift.BBS.EntityFramework.EfContext;
 using Swift.BBS.Extensions.ServiceEntensions;
 using System;
 using System.IO;
@@ -61,7 +63,7 @@ namespace Swift.BBS
 
                 //绑定dll的描述文件，用于显示接口说明等
                 var basePath = AppContext.BaseDirectory;
-                var xmlPath = Path.Combine(basePath, "SwiftCode.BBS.xml");
+                var xmlPath = Path.Combine(basePath, "Swift.BBS.xml");
                 c.IncludeXmlComments(xmlPath, true);
 
                 #region 开启Swagger的Token授权功能
@@ -82,7 +84,8 @@ namespace Swift.BBS
             #endregion
 
             #region 基于策略的授权机制
-            services.AddAuthorization(option => {
+            services.AddAuthorization(option =>
+            {
                 //单独角色
                 option.AddPolicy("Client", policy => policy.RequireRole("Client").Build());
                 //或的关系，满足其中一种角色即可
@@ -97,13 +100,15 @@ namespace Swift.BBS
             {
                 c.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 c.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(c => {
+            }).AddJwtBearer(c =>
+            {
                 var audienceConfig = Configuration["Audience:Audience"];
                 var symmentricKeyAsBase64 = Configuration["Audience:Secret"];
                 var iss = Configuration["Audience:Issuer"];
                 var keyByteArray = Encoding.ASCII.GetBytes(symmentricKeyAsBase64);
                 var signingKey = new SymmetricSecurityKey(keyByteArray);
-                c.TokenValidationParameters = new TokenValidationParameters { 
+                c.TokenValidationParameters = new TokenValidationParameters
+                {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = signingKey,
                     ValidateIssuer = true,
@@ -116,6 +121,18 @@ namespace Swift.BBS
                     RequireExpirationTime = true
                 };
             });
+            #endregion
+
+            #region 开启EF的懒加载
+
+            services.AddDbContext<SwiftBbsContext>(
+                o => o.UseLazyLoadingProxies()
+                .UseSqlServer(
+                    @"Server=.;Database=SwiftCodeBbs;Trusted_Connection=True;Connection Timeout=600;MultipleActiveResultSets=true;",
+                    x => x.MigrationsAssembly("Swift.BBS.EntityFramework")
+                )
+            );
+
             #endregion
         }
 

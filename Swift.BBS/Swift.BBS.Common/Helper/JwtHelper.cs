@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http;
 
 namespace Swift.BBS.Common.Helper
 {
@@ -65,19 +66,33 @@ namespace Swift.BBS.Common.Helper
             TokenModelJwt tokenModelJwt = new TokenModelJwt();
 
             //token校验
-            if (string.IsNullOrEmpty(jwtStr) && jwtHandler.CanReadToken(jwtStr))
+            if (!string.IsNullOrEmpty(jwtStr) && jwtHandler.CanReadToken(jwtStr))
             {
                 JwtSecurityToken jwtToken = jwtHandler.ReadJwtToken(jwtStr);
                 object role;
                 jwtToken.Payload.TryGetValue(ClaimTypes.Role, out role);
                 tokenModelJwt = new TokenModelJwt
                 {
-                    Uid = Convert.ToInt64(jwtToken.Id),
+                    Uid = Convert.ToInt32(jwtToken.Id),
                     Role = role == null ? "" : role.ToString()
                 };
             }
 
             return tokenModelJwt;
+        }
+
+        /// <summary>
+        /// 授权解析jwt
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
+        public static TokenModelJwt ParsingJwtToken(HttpContext httpContext)
+        {
+            if (!httpContext.Request.Headers.ContainsKey("Authorization"))
+                return null;
+            var tokenHeader = httpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            TokenModelJwt tm = SerializeJwt(tokenHeader);
+            return tm;
         }
     }
 
@@ -86,7 +101,7 @@ namespace Swift.BBS.Common.Helper
     /// </summary>
     public class TokenModelJwt
     {
-        public long Uid { get; set; }
+        public int Uid { get; set; }
         /// <summary>
         /// 角色
         /// </summary>
