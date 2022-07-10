@@ -41,7 +41,7 @@ namespace Swift.BBS
 
             services.AddControllers();
             //注入appsetting访问帮助类
-            services.AddSingleton(new Appsetting(Configuration));
+            services.AddSingleton(new Appsettings(Configuration));
             //注册AutoMapper启服务
             services.AddAutoMapperSetup();
 

@@ -9,9 +9,12 @@
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.1" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Castle.Core.AsyncInterceptor" Version="2.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Swift.BBS.Common\Swift.BBS.Common.csproj" />
     <ProjectReference Include="..\Swift.BBS.EntityFramework\Swift.BBS.EntityFramework.csproj" />
     <ProjectReference Include="..\Swift.BBS.IRepositories\Swift.BBS.IRepositories.csproj" />
     <ProjectReference Include="..\Swift.BBS.IServices\Swift.BBS.IServices.csproj" />

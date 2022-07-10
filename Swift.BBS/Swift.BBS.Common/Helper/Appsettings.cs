@@ -11,12 +11,12 @@ namespace Swift.BBS.Common.Helper
     /// <summary>
     /// appsetting.json文件访问帮助类
     /// </summary>
-    public class Appsetting
+    public class Appsettings
     {
         static IConfiguration Configuration { get; set; }
         static string contentPath { get; set; }
 
-        public Appsetting(string contentPath)
+        public Appsettings(string contentPath)
         {
             string Path = "appsetting.json";
 
@@ -30,7 +30,7 @@ namespace Swift.BBS.Common.Helper
                 .Build();
         }
 
-        public Appsetting(IConfiguration configuration)
+        public Appsettings(IConfiguration configuration)
         {
             Configuration = configuration;
         }

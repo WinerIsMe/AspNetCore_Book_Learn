@@ -19,9 +19,9 @@ namespace Swift.BBS.Common.Helper
         /// <returns></returns>
         public static string IssueJwt(TokenModelJwt tokenModel)
         {
-            string iss = Appsetting.app(new string[] { "Audience", "Issuer" });
-            string aud = Appsetting.app(new string[] { "Audience", "Audience" });
-            string secret = Appsetting.app(new string[] { "Audience", "Secret" });
+            string iss = Appsettings.app(new string[] { "Audience", "Issuer" });
+            string aud = Appsettings.app(new string[] { "Audience", "Audience" });
+            string secret = Appsettings.app(new string[] { "Audience", "Secret" });
 
             var claims = new List<Claim>
             {
