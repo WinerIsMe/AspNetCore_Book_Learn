@@ -48,9 +48,6 @@ namespace Swift.BBS.Extensions.AOP
                 dataIntercept += ($"【执行完成结果】：{invocation.ReturnValue}");
             }
 
-
-            dataIntercept += ($"被拦截方法执行完毕，返回结果：{invocation.ReturnValue}");
-
             #region 输出到当前项目日志
             var path = Directory.GetCurrentDirectory() + @"\Log";
             if (!Directory.Exists(path))
@@ -67,7 +64,7 @@ namespace Swift.BBS.Extensions.AOP
 
 
         }
-        public static bool IsAsyncMethod(MethodInfo method)
+        private static bool IsAsyncMethod(MethodInfo method)
         {
             return (
                 method.ReturnType == typeof(Task) ||

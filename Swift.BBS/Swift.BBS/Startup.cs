@@ -44,6 +44,8 @@ namespace Swift.BBS
             services.AddSingleton(new Appsettings(Configuration));
             //注册AutoMapper启服务
             services.AddAutoMapperSetup();
+            //注入缓存拦截服务
+            services.AddMemoryCache();
 
             //注册Swagger服务
             #region Swagger

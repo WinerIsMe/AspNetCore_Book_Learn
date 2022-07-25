@@ -17,6 +17,22 @@ namespace Swift.BBS.Extensions.ServiceEntensions
     {
         protected override void Load(ContainerBuilder builder)
         {
+
+            var cacheType = new List<Type>();
+
+            if (Appsettings.app(new string[] { "AppSettings", "MemoryCachingAOP", "Enabled" }).ObjToBool())
+            {
+                builder.RegisterType<BbsCacheAOP>();
+                cacheType.Add(typeof(BbsCacheAOP));
+            }
+
+            if (Appsettings.app(new string[] { "AppSettings", "LogAOP", "Enabled" }).ObjToBool())
+            {
+                builder.RegisterType<BbsLogAOP>();
+                cacheType.Add(typeof(BbsLogAOP));
+            }
+
+
             //注入AOP拦截器
             builder.RegisterType<BbsLogAOP>();
 
