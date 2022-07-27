@@ -14,7 +14,7 @@ using Swift.BBS.Model.ViewModels.Article;
 using Swift.BBS.Model.ViewModels.Question;
 using Swift.BBS.Model.ViewModels.UserInfo;
 
-namespace SwiftCode.BBS.API.Controllers
+namespace Swift.BBS.API.Controllers
 {
     /// <summary>
     /// 主页

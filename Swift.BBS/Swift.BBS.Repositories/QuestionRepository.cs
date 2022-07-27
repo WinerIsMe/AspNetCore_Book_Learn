@@ -11,7 +11,7 @@ using Swift.BBS.IRepositories;
 using Swift.BBS.Model.Models;
 using Swift.BBS.Repositories.BASE;
 
-namespace SwiftCode.BBS.Repositories
+namespace Swift.BBS.Repositories
 {
     public class QuestionRepository: BaseRepository<Question> , IQuestionRepository
     {

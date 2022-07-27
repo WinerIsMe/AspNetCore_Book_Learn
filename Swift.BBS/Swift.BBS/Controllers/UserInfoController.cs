@@ -10,7 +10,7 @@ using Swift.BBS.Model.ViewModels.UserInfo;
 using System.Threading.Tasks;
 
 
-namespace SwiftCode.BBS.API.Controllers
+namespace Swift.BBS.API.Controllers
 {
     /// <summary>
     /// 个人中心

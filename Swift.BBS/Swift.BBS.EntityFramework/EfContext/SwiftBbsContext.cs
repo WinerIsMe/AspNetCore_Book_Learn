@@ -77,12 +77,5 @@ namespace Swift.BBS.EntityFramework.EfContext
 
 
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder
-                .UseSqlServer(@"Server=.;Database=SwiftCodeBbs;Trusted_Connection=True;Connection Timeout=600;MultipleActiveResultSets=true;")
-                .LogTo(Console.WriteLine, LogLevel.Information);
-        }
     }
 }
